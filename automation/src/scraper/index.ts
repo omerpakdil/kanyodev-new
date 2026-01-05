@@ -5,6 +5,7 @@ import { config } from "../config/index.js";
 import { scrapeGoogleMaps } from "./sources/google-maps.js";
 import { scrapeTudoksad } from "./sources/tudoksad.js";
 import { scrapeOdtuTeknokent } from "./sources/odtu.js";
+import { scrapeAriTeknokent } from "./sources/ari-teknokent.js";
 
 // Scrape from company website to get email
 export async function scrapeCompanyWebsite(url: string): Promise<{
@@ -80,6 +81,9 @@ export async function runScraper(sources: { sector: string; city: string }[]) {
         } else if (source.sector === "ODTU") {
             companies = await scrapeOdtuTeknokent();
             sourceName = "odtu";
+        } else if (source.sector === "ARI") {
+            companies = await scrapeAriTeknokent();
+            sourceName = "ari_teknokent";
         } else {
             companies = await scrapeGoogleMaps(source.sector, source.city, 10);
             sourceName = "google_maps";

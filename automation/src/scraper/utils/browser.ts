@@ -1,11 +1,29 @@
-import puppeteer, { Browser, Page } from "puppeteer";
+import puppeteer, { Browser, Page } from "puppeteer-core";
+import { existsSync } from "fs";
 
 let browser: Browser | null = null;
 
+// Common Chrome paths on Windows
+const CHROME_PATHS = [
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    `${process.env.LOCALAPPDATA}\\Google\\Chrome\\Application\\chrome.exe`,
+];
+
+function findChrome(): string | undefined {
+    for (const path of CHROME_PATHS) {
+        if (existsSync(path)) return path;
+    }
+    return undefined;
+}
+
 export async function getBrowser(): Promise<Browser> {
     if (!browser) {
+        const executablePath = findChrome();
+
         browser = await puppeteer.launch({
             headless: true,
+            executablePath, // Use system Chrome if found
             args: [
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
