@@ -73,7 +73,7 @@ export function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 px-60">
+      <div className="relative z-10 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-48">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           {/* Left Column - Text Content */}
           <div className="space-y-8">

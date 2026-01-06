@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail } from "lucide-react";
 import { Logo } from "@/components/logo";
 
 export function Footer() {
   return (
     <footer className="w-full border-t border-border bg-card">
-      <div className="px-60 py-8">
+      <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-48 py-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           {/* Left - Brand */}
           <div className="flex items-center gap-8">
@@ -33,27 +33,14 @@ export function Footer() {
             </Link>
           </div>
 
-          {/* Right - Contact & Social */}
-          <div className="flex items-center gap-4">
-            <a
-              href="mailto:info@kanyodev.com"
-              className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1"
-            >
-              <Mail className="h-4 w-4" />
-              <span className="hidden sm:inline">info@kanyodev.com</span>
-            </a>
-            <div className="flex items-center gap-2">
-              <a href="#" className="text-muted-foreground hover:text-foreground">
-                <Github className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground">
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground">
-                <Twitter className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
+          {/* Right - Contact */}
+          <a
+            href="mailto:info@kanyodev.com"
+            className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1"
+          >
+            <Mail className="h-4 w-4" />
+            <span className="hidden sm:inline">info@kanyodev.com</span>
+          </a>
         </div>
 
         {/* Bottom */}
