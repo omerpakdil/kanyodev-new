@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/logo";
 
 const navItems = [
   { name: "Hizmetler", href: "/hizmetler" },
@@ -24,11 +25,10 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-18 items-center px-72 py-4">
+      <div className="flex h-18 items-center px-60 py-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1.5 mr-12">
-          <span className="text-2xl font-bold text-primary">Kanyo</span>
-          <span className="text-2xl font-bold">Dev</span>
+        <Link href="/" className="mr-12">
+          <Logo size="md" />
         </Link>
 
         {/* Desktop Navigation */}

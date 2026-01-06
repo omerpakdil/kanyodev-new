@@ -125,7 +125,7 @@ export default function HizmetlerPage() {
 
   return (
     <div className="min-h-screen py-24">
-      <div className="px-72">
+      <div className="px-60">
         {/* Header */}
         <div className="text-center mb-16">
           <Badge className="mb-4">Hizmetler</Badge>

@@ -45,7 +45,7 @@ const features = [
 export function FeaturesSection() {
   return (
     <section className="w-full py-14 border-t border-border bg-muted/30">
-      <div className="px-72">
+      <div className="px-60">
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold">Neden KanyoDev?</h2>

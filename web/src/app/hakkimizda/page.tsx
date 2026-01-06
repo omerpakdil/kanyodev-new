@@ -59,7 +59,7 @@ const milestones = [
 export default function HakkimizdaPage() {
   return (
     <div className="min-h-screen py-24">
-      <div className="px-72">
+      <div className="px-60">
         {/* Header */}
         <div className="text-center">
           <Badge className="mb-4">Hakkımızda</Badge>

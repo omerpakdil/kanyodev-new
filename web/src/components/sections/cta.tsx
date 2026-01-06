@@ -13,7 +13,7 @@ const benefits = [
 export function CTASection() {
   return (
     <section className="w-full py-14 border-t border-border">
-      <div className="px-72">
+      <div className="px-60">
         <div className="text-center">
           <h2 className="text-3xl font-bold">Projenizi Hayata Geçirelim</h2>
           <p className="text-lg text-muted-foreground mt-3">

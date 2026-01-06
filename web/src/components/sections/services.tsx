@@ -53,7 +53,7 @@ const services = [
 export function ServicesSection() {
   return (
     <section className="w-full py-14 border-t border-border">
-      <div className="px-72">
+      <div className="px-60">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
