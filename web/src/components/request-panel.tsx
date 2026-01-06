@@ -125,24 +125,44 @@ export function RequestPanel() {
   const handleSubmit = async () => {
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          projectType: projectTypes.find(t => t.id === formData.projectType)?.label || formData.projectType,
+          budget: budgetRanges.find(b => b.value === formData.budget)?.label || formData.budget,
+          message: `Proje Açıklaması:\n${formData.description}\n\nİstenen Özellikler:\n${formData.features || "Belirtilmedi"}\n\nZaman Çizelgesi: ${timelineOptions.find(t => t.value === formData.timeline)?.label || formData.timeline}`,
+        }),
+      });
 
-    setIsSubmitting(false);
-    toast.success("Talebiniz başarıyla gönderildi! En kısa sürede dönüş yapacağız.");
-    setIsOpen(false);
-    setStep(1);
-    setFormData({
-      projectType: "",
-      description: "",
-      features: "",
-      budget: "",
-      timeline: "",
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-    });
+      if (!response.ok) {
+        throw new Error("Gönderim hatası");
+      }
+
+      toast.success("Talebiniz başarıyla gönderildi! En kısa sürede dönüş yapacağız.");
+      setIsOpen(false);
+      setStep(1);
+      setFormData({
+        projectType: "",
+        description: "",
+        features: "",
+        budget: "",
+        timeline: "",
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+      });
+    } catch (error) {
+      toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const canProceed = () => {

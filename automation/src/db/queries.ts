@@ -45,7 +45,8 @@ export async function getCompanyById(id: string) {
     return data as Company;
 }
 
-export async function checkCompanyExists(website: string | null, name: string) {
+export async function checkCompanyExists(website: string | null, name: string, email?: string | null) {
+    // Primary check: website (unique identifier)
     if (website) {
         const { count } = await supabase
             .from("companies")
@@ -54,17 +55,16 @@ export async function checkCompanyExists(website: string | null, name: string) {
         if (count && count > 0) return true;
     }
 
-    // fallback to name check if no website or website not found (though website is unique key)
-    // Actually, name might not be unique, but for ODTU list, if name matches exactly, we can skip?
-    // Let's rely on website mostly. If website is null, we can check name.
-
-    if (name) {
+    // Secondary check: email (more reliable than name alone)
+    if (email) {
         const { count } = await supabase
             .from("companies")
             .select("*", { count: "exact", head: true })
-            .eq("name", name);
+            .eq("email", email);
         if (count && count > 0) return true;
     }
+
+    // Don't check by name alone - different teknokents can have companies with same name
 
     return false;
 }

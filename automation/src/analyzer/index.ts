@@ -5,7 +5,7 @@ import { scrapeCompanyWebsite } from "../scraper/index.js";
 import { Company } from "../db/client.js";
 
 const genAI = new GoogleGenerativeAI(config.gemini.apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 interface AnalysisResult {
     summary: string;

@@ -1,7 +1,15 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || "smtp.hostinger.com",
+    port: parseInt(process.env.SMTP_PORT || "465"),
+    secure: true,
+    auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+    },
+});
 
 export async function POST(request: NextRequest) {
     try {
@@ -17,8 +25,8 @@ export async function POST(request: NextRequest) {
         }
 
         // Send email
-        const { data, error } = await resend.emails.send({
-            from: "KanyoDev <noreply@kanyodev.com>",
+        const info = await transporter.sendMail({
+            from: `"KanyoDev" <${process.env.SMTP_USER}>`,
             to: process.env.CONTACT_EMAIL || "info@kanyodev.com",
             replyTo: email,
             subject: `Yeni Proje Talebi: ${projectType} - ${name}`,
@@ -39,19 +47,11 @@ export async function POST(request: NextRequest) {
       `,
         });
 
-        if (error) {
-            console.error("Resend error:", error);
-            return NextResponse.json(
-                { error: "Mail gönderilemedi" },
-                { status: 500 }
-            );
-        }
-
-        return NextResponse.json({ success: true, id: data?.id });
+        return NextResponse.json({ success: true, id: info.messageId });
     } catch (error) {
         console.error("Contact API error:", error);
         return NextResponse.json(
-            { error: "Bir hata oluştu" },
+            { error: "Mail gönderilemedi" },
             { status: 500 }
         );
     }

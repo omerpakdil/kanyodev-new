@@ -6,6 +6,8 @@ import { scrapeGoogleMaps } from "./sources/google-maps.js";
 import { scrapeTudoksad } from "./sources/tudoksad.js";
 import { scrapeOdtuTeknokent } from "./sources/odtu.js";
 import { scrapeAriTeknokent } from "./sources/ari-teknokent.js";
+import { scrapeMarmaraTeknokent } from "./sources/marmara.js";
+import { scrapeHacettepeTeknokent } from "./sources/hacettepe.js";
 
 // Scrape from company website to get email
 export async function scrapeCompanyWebsite(url: string): Promise<{
@@ -84,6 +86,12 @@ export async function runScraper(sources: { sector: string; city: string }[]) {
         } else if (source.sector === "ARI") {
             companies = await scrapeAriTeknokent();
             sourceName = "ari_teknokent";
+        } else if (source.sector === "MARMARA") {
+            companies = await scrapeMarmaraTeknokent();
+            sourceName = "marmara_teknokent";
+        } else if (source.sector === "HACETTEPE") {
+            companies = await scrapeHacettepeTeknokent();
+            sourceName = "hacettepe_teknokent";
         } else {
             companies = await scrapeGoogleMaps(source.sector, source.city, 10);
             sourceName = "google_maps";
@@ -93,7 +101,7 @@ export async function runScraper(sources: { sector: string; city: string }[]) {
             // Check if already exists in DB to save time
             // Only check if we are in ODTU or Tudoksad mode where we re-scrape list every time?
             // Actually good for all.
-            const exists = await checkCompanyExists(company.website, company.name);
+            const exists = await checkCompanyExists(company.website, company.name, company.email);
             if (exists) {
                 console.log(`  ⏭️ Skipped (Already in DB): ${company.name}`);
                 continue;

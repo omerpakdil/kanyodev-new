@@ -1,6 +1,8 @@
 import { runAnalyzer } from "../analyzer/index.js";
 
-console.log("🧠 Manual Analyzer Run");
-runAnalyzer(10) // Limit to 10 companies
+const limit = parseInt(process.argv[2] || "1");
+
+console.log(`🧠 Manual Analyzer Run (limit: ${limit})`);
+runAnalyzer(limit)
     .then(() => console.log("Done"))
     .catch(console.error);

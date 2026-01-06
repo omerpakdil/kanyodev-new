@@ -1,11 +1,20 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { config } from "../config/index.js";
 import { getPendingEmails, updateEmailStatus, getTodayEmailCount, insertEmail, getAnalysesWithoutEmail, updateSourceLastScraped } from "../db/queries.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const resend = new Resend(config.resend.apiKey);
+const transporter = nodemailer.createTransport({
+    host: config.smtp.host,
+    port: config.smtp.port,
+    secure: config.smtp.secure,
+    auth: {
+        user: config.smtp.user,
+        pass: config.smtp.password
+    }
+});
+
 const genAI = new GoogleGenerativeAI(config.gemini.apiKey);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export async function generateEmailContent(companyName: string, sector: string, analysis: any) {
     const prompt = `
@@ -92,18 +101,16 @@ export async function sendPendingEmails() {
         try {
             console.log(`  📧 Sending to ${company.name} (${company.email})...`);
 
-            const { data, error } = await resend.emails.send({
-                from: `KanyoDev <${config.resend.senderEmail}>`,
-                to: [company.email],
-                replyTo: config.resend.replyToEmail,
+            const info = await transporter.sendMail({
+                from: `KanyoDev <${config.smtp.senderEmail}>`,
+                to: company.email,
+                replyTo: config.smtp.replyToEmail,
                 subject: email.subject,
                 html: email.body + `<br><br><small>Bu mail otomatiktir. Listeden çıkmak için yanıtlayabilirsiniz.</small>`
             });
 
-            if (error) throw error;
-
-            await updateEmailStatus(email.id, "sent", data?.id);
-            console.log(`  ✅ Sent! ID: ${data?.id}`);
+            await updateEmailStatus(email.id, "sent", info.messageId);
+            console.log(`  ✅ Sent! ID: ${info.messageId}`);
 
         } catch (error) {
             console.error(`  ❌ Failed to send to ${company.name}:`, error);

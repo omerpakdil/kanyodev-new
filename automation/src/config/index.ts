@@ -8,8 +8,12 @@ export const config = {
     gemini: {
         apiKey: process.env.GEMINI_API_KEY!,
     },
-    resend: {
-        apiKey: process.env.RESEND_API_KEY!,
+    smtp: {
+        host: process.env.SMTP_HOST || "smtp.hostinger.com",
+        port: parseInt(process.env.SMTP_PORT || "587"),
+        secure: process.env.SMTP_SECURE === "true", // true for 465, false for 587
+        user: process.env.SMTP_USER!,
+        password: process.env.SMTP_PASSWORD!,
         senderEmail: process.env.SENDER_EMAIL || "info@kanyodev.com",
         replyToEmail: process.env.REPLY_TO_EMAIL || "info@kanyodev.com",
     },
