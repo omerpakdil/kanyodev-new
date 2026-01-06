@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,6 +9,17 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Hakkımızda | KanyoDev",
+  description:
+    "KanyoDev olarak işletmelerin dijital dönüşüm yolculuğunda güvenilir teknoloji partneri olmayı hedefliyoruz. Misyonumuz, vizyonumuz ve değerlerimiz.",
+  openGraph: {
+    title: "Hakkımızda | KanyoDev",
+    description:
+      "KanyoDev olarak işletmelerin dijital dönüşüm yolculuğunda güvenilir teknoloji partneri olmayı hedefliyoruz.",
+  },
+};
 
 const values = [
   {
