@@ -166,7 +166,7 @@ export default function IletisimPage() {
                 </div>
                 <div>
                   <p className="font-medium">Konum</p>
-                  <p className="text-muted-foreground">Türkiye</p>
+                  <p className="text-muted-foreground">Ankara, Türkiye</p>
                 </div>
               </div>
 

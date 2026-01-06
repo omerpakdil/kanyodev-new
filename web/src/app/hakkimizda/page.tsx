@@ -6,9 +6,6 @@ import {
   Award,
   Heart,
   ArrowRight,
-  Linkedin,
-  Github,
-  Twitter,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -36,53 +33,6 @@ const values = [
     title: "Tutku",
     description:
       "Yazılım geliştirmeyi seviyoruz. Bu tutku her projemize yansıyor.",
-  },
-];
-
-const team = [
-  {
-    name: "Ömer Salih Pakdil",
-    role: "Kurucu & Full-Stack Developer",
-    bio: "5+ yıl yazılım geliştirme deneyimi. Web, mobil ve otomasyon alanlarında uzman.",
-    image: null,
-    social: {
-      linkedin: "#",
-      github: "#",
-      twitter: "#",
-    },
-  },
-  {
-    name: "Abdussamet Şekerci",
-    role: "Backend Developer",
-    bio: "Güçlü backend sistemleri ve API geliştirme konusunda deneyimli. Node.js ve Python uzmanı.",
-    image: null,
-    social: {
-      linkedin: "#",
-      github: "#",
-      twitter: "#",
-    },
-  },
-  {
-    name: "Kadir Altunsoy",
-    role: "Mobile Developer",
-    bio: "React Native ve Flutter ile cross-platform mobil uygulama geliştirme uzmanı.",
-    image: null,
-    social: {
-      linkedin: "#",
-      github: "#",
-      twitter: "#",
-    },
-  },
-  {
-    name: "Ozan Üstündağ",
-    role: "UI/UX Designer",
-    bio: "Kullanıcı odaklı arayüz tasarımı ve deneyim optimizasyonu konusunda uzman.",
-    image: null,
-    social: {
-      linkedin: "#",
-      github: "#",
-      twitter: "#",
-    },
   },
 ];
 
@@ -214,55 +164,6 @@ export default function HakkimizdaPage() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Team */}
-        <div className="mt-24">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold">Ekibimiz</h2>
-            <p className="mt-4 text-muted-foreground">
-              Projelerinizi hayata geçiren uzman ekip.
-            </p>
-          </div>
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
-            {team.map((member) => (
-              <div
-                key={member.name}
-                className="max-w-sm rounded-2xl border border-border bg-card p-8 text-center"
-              >
-                <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-primary/5">
-                  <span className="text-3xl font-bold text-primary">
-                    {member.name.charAt(0)}
-                  </span>
-                </div>
-                <h3 className="mt-6 text-xl font-bold">{member.name}</h3>
-                <p className="text-primary">{member.role}</p>
-                <p className="mt-4 text-sm text-muted-foreground">
-                  {member.bio}
-                </p>
-                <div className="mt-6 flex justify-center gap-4">
-                  <a
-                    href={member.social.linkedin}
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    <Linkedin className="h-5 w-5" />
-                  </a>
-                  <a
-                    href={member.social.github}
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    <Github className="h-5 w-5" />
-                  </a>
-                  <a
-                    href={member.social.twitter}
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    <Twitter className="h-5 w-5" />
-                  </a>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
 

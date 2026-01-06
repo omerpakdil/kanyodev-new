@@ -59,7 +59,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-6 pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-muted-foreground">
           <span>© {new Date().getFullYear()} KanyoDev. Tüm hakları saklıdır.</span>
-          <span>Türkiye</span>
+          <span>Ankara, Türkiyes</span>
         </div>
       </div>
     </footer>
